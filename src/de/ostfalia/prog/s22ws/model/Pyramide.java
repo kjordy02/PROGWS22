@@ -2,7 +2,6 @@ package de.ostfalia.prog.s22ws.model;
 
 import de.ostfalia.prog.s22ws.base.Farbe;
 
-<<<<<<< HEAD
 public class Pyramide {
 	 static Pyramide pyramideInstance;
 	    private Wuerfel[] wuerfelliste = new Wuerfel[5];
@@ -45,11 +44,9 @@ public class Pyramide {
 	        }
 	        return ausgabe;
 	    }
-	}
 
-=======
 	public Wuerfel wuerfelZug() {
-		for(int i = 0; i<wuerfelliste.length(); i++ ) {
+		for(int i = 0; i<wuerfelliste.length; i++ ) {
 			if (wuerfelliste[i].equals(null)) {
 				
 			}
@@ -58,4 +55,3 @@ public class Pyramide {
 	}
 
 }
->>>>>>> branch 'master' of https://github.com/kjordy02/PROGWS22.git
