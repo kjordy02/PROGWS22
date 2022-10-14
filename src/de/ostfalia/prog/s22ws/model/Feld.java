@@ -7,7 +7,6 @@ public class Feld {
 	
 	
 	public Feld(int pos) {
-		super();
 		this.pos = pos;
 		this.kamele = new KamelList();
 	}
@@ -23,7 +22,7 @@ public class Feld {
 	}
 
 
-	public void setKamel(Kamel kamel) {
+	public void addKamel(Kamel kamel) {
 		kamele.add(kamel);
 	}
 	
