@@ -8,6 +8,10 @@ import de.ostfalia.prog.s22ws.base.ICamelUp;
 
 public class CamelUp implements ICamelUp {
 
+	Spielrunde spielrunde = Spielrunde.getInstance();
+	Pyramide pyramide = Pyramide.getInstance();
+	Spielfeld spielfeld = Spielfeld.getInstance();
+
 	@Override
 	public void startPosition() {
 		// TODO Auto-generated method stub
@@ -22,7 +26,8 @@ public class CamelUp implements ICamelUp {
 
 	@Override
 	public void bewegeKamel(Charakter charakter) {
-		// TODO Auto-generated method stub
+		Wuerfel w = spielrunde.getSpieler(charakter).benutzePyramide(pyramide);
+		spielfeld.bewegeKamel(w.getFarbe(),w.getAugenzahl());
 
 	}
 

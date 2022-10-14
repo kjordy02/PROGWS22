@@ -24,7 +24,7 @@ public class Spieler {
 		return charakter;
 	}
 	
-	public void benutzePyramide(Pyramide pyramide) {
-		pyramide.wuerfelZug();
+	public Wuerfel benutzePyramide(Pyramide pyramide) {
+		return pyramide.wuerfelZug();
 	}
 }

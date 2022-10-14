@@ -1,5 +1,7 @@
 package de.ostfalia.prog.s22ws.model;
 
+import de.ostfalia.prog.s22ws.base.Farbe;
+
 public class KamelList {
 
 	KamelElement head;
@@ -40,17 +42,6 @@ public class KamelList {
 	}
 
 	/**
-	 * Gibt eine KamalListe der Kamele die weiterziehen zurück
-	 * 
-	 * @param kamel
-	 * @return KamelList
-	 */
-	public KamelList weiterZiehen(Kamel kamel) {
-
-		return null;
-	}
-
-	/**
 	 * Prüft ob ein Kamel in der Kamelliste ist
 	 * 
 	 * @param kamel
@@ -71,6 +62,51 @@ public class KamelList {
 
 		} else
 			return false;
+	}
+
+	public Kamel getKamel(Farbe farbe) {
+		KamelElement temp = head;
+		if (!temp.equals(null)) {
+			do {
+				if (temp.getKamel().getFarbe().equals(farbe)) {
+					return temp.getKamel();
+				}
+				if (temp.hasNext()) {
+					temp = temp.getNext();
+				}
+			} while (temp.hasNext());
+			return null;
+
+		} else
+			return null;
+	}
+
+	public boolean remove(Kamel kamel) {
+		KamelElement loescher = head;
+		KamelElement pruefer = loescher.hasNext() ? pruefer = loescher.getNext() : null;
+
+		if (!loescher.equals(null)) {
+			if (!pruefer.equals(null)) {
+
+				do {
+					if (pruefer.getKamel().equals(kamel)) {
+						loescher.setNext(null);
+						return true;
+					}
+					if (pruefer.hasNext()) {
+						loescher = pruefer;
+						pruefer = pruefer.getNext();
+					}
+				} while (pruefer.hasNext());
+				return false;
+			} else {
+				head = null;
+				return true;
+			}
+
+		} else
+			return false;
+
 	}
 
 }

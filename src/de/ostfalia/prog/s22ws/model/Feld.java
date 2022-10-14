@@ -26,6 +26,8 @@ public class Feld {
 		kamele.add(kamel);
 	}
 	
-	
+	public boolean removeKamel(Kamel kamel) {
+		return kamele.remove(kamel);
+	}
 	
 }
