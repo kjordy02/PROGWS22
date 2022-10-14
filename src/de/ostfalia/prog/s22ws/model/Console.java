@@ -7,7 +7,7 @@ import de.ostfalia.prog.s22ws.base.Charakter;
 
 public class Console implements IO {
 
-	private Scanner sc = new Scanner(System.in);
+	private final Scanner sc = new Scanner(System.in);
 	private ArrayList<Charakter> offeneCharaktere = new ArrayList<Charakter>();
 
 	public Console() {
