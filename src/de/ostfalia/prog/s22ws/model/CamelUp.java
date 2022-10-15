@@ -20,17 +20,6 @@ public class CamelUp implements ICamelUp {
 
 	@Override
 	public void startPosition(String... positionen) {
-		for(int i = 0; i < positionen.length; i++) {
-			 String[] str = positionen[i].split("\\:");
-			 for(Kamel k : KamelList.getList()) {
-				 
-			 }
-			 /* 1) Durch Kamelliste durchgehen & String mit Farbe vergleichen
-			  * 2) Vergleichen mit Farbe die reingegeben wurde
-			  * 3) Diesem Kamel das Feld zuweisen 
-			  * */
-			 
-		}
 		// TODO Auto-generated method stub
 		for(Farbe f: Farbe.values()) {
 		spielfeld.bewegeKamel(f, 0);

@@ -15,7 +15,7 @@ public class KamelList {
 	}
 
 	/**
-	 * fï¿½gt ein Kamel am Ende der Liste hinzu
+	 * fügt ein Kamel am Ende der Liste hinzu
 	 * 
 	 * @param kamel
 	 */
@@ -31,7 +31,7 @@ public class KamelList {
 	}
 
 	/**
-	 * fï¿½gt ein Kamel am Anfang der Liste hinzu
+	 * fügt ein Kamel am Anfang der Liste hinzu
 	 * 
 	 * @param kamel
 	 */
@@ -42,7 +42,7 @@ public class KamelList {
 	}
 
 	/**
-	 * Prï¿½ft ob ein Kamel in der Kamelliste ist
+	 * Prüft ob ein Kamel in der Kamelliste ist
 	 * 
 	 * @param kamel
 	 * @return
@@ -63,8 +63,6 @@ public class KamelList {
 		} else
 			return false;
 	}
-	
-	
 
 	public Kamel getKamel(Farbe farbe) {
 		KamelElement temp = head;
