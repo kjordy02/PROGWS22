@@ -4,7 +4,7 @@ import de.ostfalia.prog.s22ws.base.Farbe;
 
 public class Kamel {
 	
-	Farbe farbe;
+	private Farbe farbe;
 
 	public Kamel(Farbe farbe) {
 		super();
