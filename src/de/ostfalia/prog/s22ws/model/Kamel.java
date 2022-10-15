@@ -3,16 +3,20 @@ package de.ostfalia.prog.s22ws.model;
 import de.ostfalia.prog.s22ws.base.Farbe;
 
 public class Kamel {
-	
-	private Farbe farbe;
 
-	public Kamel(Farbe farbe) {
-		super();
-		this.farbe = farbe;
-	}
+    private Farbe farbe;
 
-	public Farbe getFarbe() {
-		return farbe;
-	}
-	
+    public Kamel(Farbe farbe) {
+        super();
+        this.farbe = farbe;
+    }
+
+    public Farbe getFarbe() {
+        return farbe;
+    }
+
+    @Override
+    public String toString() {
+        return farbe.toString().toLowerCase() + "es Kamel";
+    }
 }

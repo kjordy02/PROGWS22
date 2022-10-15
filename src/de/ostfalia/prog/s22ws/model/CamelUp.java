@@ -11,6 +11,7 @@ public class CamelUp implements ICamelUp {
     Spielrunde spielrunde = Spielrunde.getInstance();
     Pyramide pyramide = Pyramide.getInstance();
     Spielfeld spielfeld = Spielfeld.getInstance();
+    IO io = new Console();
 
     @Override
     public void startPosition() {
@@ -36,6 +37,7 @@ public class CamelUp implements ICamelUp {
     public void bewegeKamel(Charakter charakter) {
         Wuerfel w = spielrunde.getSpieler(charakter).benutzePyramide(pyramide);
         spielfeld.bewegeKamel(w.getFarbe(), w.getAugenzahl());
+        io.bewegeKamel(w.getFarbe(), w.getAugenzahl());
 
     }
 
@@ -127,6 +129,72 @@ public class CamelUp implements ICamelUp {
     public List<Charakter> spielGewinner() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public void startPlayer() {
+        spielrunde.spielrundeErstellen();
+
+    }
+
+    public void startSpiel() {
+        this.startPlayer();
+        this.startPosition();
+        while(this.feldNummer(this.fuehrendesKamel()) < 16) {
+            startRunde();
+        }
+    }
+    
+    public void startRunde() {
+        for (Spieler spieler : spielrunde.getTeilnehemer()) {
+            io.anDerReihe(spieler);
+            Charakter cha = spieler.getCharakter();
+            int auswahl = io.giveOptionsAtTurn();
+            do {
+                switch (auswahl) {
+                    case 1:
+                        this.bewegeKamel(cha);
+                        break;
+                    /*
+                     * case 2:
+                     * this.
+                     * break;
+                     * case 3:
+                     * this.etappenWette(cha, null);
+                     * break;
+                     * case 4:
+                     * this.wetteTollesKamel(cha, null);
+                     * break;
+                     * case 5:
+                     * this.wetteOllesKamel(cha, null);
+                     * break;
+                     */
+                    default:
+                        io.falscheEingabe();
+                        auswahl = 0;
+                        break;
+                }
+            } while (auswahl == 0);
+            auswahl = io.giveOptionsAfterTurn();
+            Farbe farbe;
+            do {
+                switch (auswahl) {
+                    case 0:
+
+                    case 1:
+                        farbe = this.fuehrendesKamel();
+                        io.fuehrendes(farbe);
+                        break;
+                    case 2:
+                        farbe = this.letztesKamel();
+                        io.letztes(farbe);
+                        break;
+                    default:
+                        io.falscheEingabe();
+                        auswahl = -1;
+                        break;
+                }
+            } while (auswahl == -1);
+        }
     }
 
 }
