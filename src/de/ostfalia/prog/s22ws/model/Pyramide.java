@@ -32,9 +32,9 @@ public class Pyramide {
 			}
 		}
 	}
-
-	public int anzahlWuerfel() {
-		return 0;
+	
+	public Wuerfel[] getwuerfelliste() {
+		return wuerfelliste;
 	}
 
 	public String toString() {

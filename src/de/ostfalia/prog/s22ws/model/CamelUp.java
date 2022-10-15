@@ -21,7 +21,15 @@ public class CamelUp implements ICamelUp {
 	@Override
 	public void startPosition(String... positionen) {
 		// TODO Auto-generated method stub
-
+		for(Farbe f: Farbe.values()) {
+		spielfeld.bewegeKamel(f, 0);
+		}
+		pyramide.initialisiere(positionen);
+		Wuerfel[] arr = pyramide.getwuerfelliste();
+		for(int i = 0; i< arr.length; i++) {
+			spielfeld.bewegeKamel(arr[i].getFarbe(), arr[i].getAugenzahl());
+		}
+		
 	}
 
 	@Override
