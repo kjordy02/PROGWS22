@@ -1,6 +1,9 @@
 package de.ostfalia.prog.s22ws.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import de.ostfalia.prog.s22ws.base.Charakter;
 import de.ostfalia.prog.s22ws.base.Farbe;
@@ -12,10 +15,24 @@ public class CamelUp implements ICamelUp {
     Pyramide pyramide = Pyramide.getInstance();
     Spielfeld spielfeld = Spielfeld.getInstance();
     IO io = new Console();
+    Random rnd = new Random();
 
     @Override
     public void startPosition() {
-        // TODO Auto-generated method stub
+
+        ArrayList<Farbe> color = new ArrayList<Farbe>();
+        for (Farbe f : Farbe.values()) {
+            color.add(f);
+        }
+
+        for (Farbe f : color) {
+            spielfeld.getFeld(0).addKamel(new Kamel(f));
+        }
+
+        Collections.shuffle(color);
+        for (int i = 0; i < 4; i++) {
+            spielfeld.setzeKamel(color.get(i), (int) (Math.random() * 3 + 1));
+        }
 
     }
 
@@ -45,7 +62,7 @@ public class CamelUp implements ICamelUp {
     public Farbe fuehrendesKamel() {
         Kamel erster = null;
         for (int i = 0; i < spielfeld.felder.length; i++) {
-            if (!spielfeld.getFeld(i).getKamele().getHead().equals(null)) {
+            if (!(spielfeld.getFeld(i).getKamele().getAnzElemente() == 0)) {
                 KamelElement temp = spielfeld.getFeld(i).getKamele().getHead();
                 while (temp.hasNext()) {
                     temp = temp.getNext();
@@ -76,7 +93,7 @@ public class CamelUp implements ICamelUp {
     @Override
     public int feldNummer(Farbe farbe) {
         for (int i = 0; i < spielfeld.felder.length; i++) {
-            if (!spielfeld.getFeld(i).getKamele().getHead().equals(null)) {
+            if (!(spielfeld.getFeld(i).getKamele().getHead() == null)) {
                 KamelElement temp = spielfeld.getFeld(i).getKamele().getHead();
                 while (temp.hasNext()) {
                     if (temp.getKamel().getFarbe().equals(farbe)) {
@@ -139,11 +156,11 @@ public class CamelUp implements ICamelUp {
     public void startSpiel() {
         this.startPlayer();
         this.startPosition();
-        while(this.feldNummer(this.fuehrendesKamel()) < 16) {
+        while (this.feldNummer(this.fuehrendesKamel()) < 16) {
             startRunde();
         }
     }
-    
+
     public void startRunde() {
         for (Spieler spieler : spielrunde.getTeilnehemer()) {
             io.anDerReihe(spieler);

@@ -45,7 +45,7 @@ public class Console implements IO {
     }
 
     @Override
-    public int giveOptions() {
+    public int giveOptionsAtTurn() {
         System.out.println("Was möchtest du tun?");
         System.out.println("1. Kamel bewegen, 2. Wüstenplättchen legen, 3. Etappensieg wetten, 4. Tolles Kamel wetten 5. Olles Kamel wetten");
         int i = sc.nextInt();
@@ -54,7 +54,7 @@ public class Console implements IO {
 
     @Override
     public void bewegeKamel(Farbe farbe, int i) {
-        System.out.println("Das Kamel mit der Farbe " + farbe + "ist um " + i + " Felder nach vorne gezogen.");
+        System.out.println("Das Kamel mit der Farbe " + farbe.toString() + "ist um " + i + " Felder nach vorne gezogen.");
         
     }
 
@@ -62,5 +62,23 @@ public class Console implements IO {
     public void falscheEingabe() {
         System.out.println("Du hast eine Falsche Eingabe getätigt.");
         
-    }
+	}
+
+	@Override
+	public int giveOptionsAfterTurn() {
+		System.out.println("Was möchtest du tun?");
+        System.out.println("1. Führendes Kamel wissen, 2. Letztes Kamel wissen");
+        int i = sc.nextInt();
+        return i;
+	}
+
+	@Override
+	public void fuehrendes(Farbe farbe) {
+		System.out.println("Das führende kamel hat die Farbe " + farbe.toString());
+	}
+
+	@Override
+	public void letztes(Farbe farbe) {
+		System.out.println("Das letzte kamel hat die Farbe " + farbe.toString());
+	}
 }
