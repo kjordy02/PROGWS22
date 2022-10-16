@@ -29,5 +29,11 @@ public class Feld {
 	public boolean removeKamel(Kamel kamel) {
 		return kamele.remove(kamel);
 	}
+
+
+    public void addKamelElement(KamelElement kamelElement) {
+        kamele.add(kamelElement);
+        
+    }
 	
 }

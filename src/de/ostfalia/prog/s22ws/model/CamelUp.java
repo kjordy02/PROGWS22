@@ -21,43 +21,38 @@ public class CamelUp implements ICamelUp {
     public void startPosition() {
 
         ArrayList<Farbe> color = new ArrayList<Farbe>();
+        for (Farbe f : Farbe.values()) {
+            color.add(f);
+        }
+
+        for (Farbe f : color) {
+            spielfeld.getFeld(0).addKamel(new Kamel(f));
+        }
+
+        Collections.shuffle(color);
+        for (int i = 0; i < 4; i++) {
+            spielfeld.setzeKamel(color.get(i), (int) (Math.random() * 3 + 1));
+        }
+
+        ArrayList<Farbe> color = new ArrayList<Farbe>();
         int zufallszahl = (int) (Math.random() * 3 + 1);
         for (Farbe f : Farbe.values()) {
             color.add(f);
         }
 
-        Collections.shuffle(color);
-        for (int i = 0; i < 4; i++) {
-            spielfeld.bewegeKamel(color.get(i), zufallszahl);
+    @Override
+    public void startPosition(String... positionen) {
+        // TODO Auto-generated method stub
+        for (Farbe f : Farbe.values()) {
+            spielfeld.bewegeKamel(f, 0);
+        }
+        pyramide.initialisiere(positionen);
+        Wuerfel[] arr = pyramide.getwuerfelliste();
+        for (int i = 0; i < arr.length; i++) {
+            spielfeld.bewegeKamel(arr[i].getFarbe(), arr[i].getAugenzahl());
         }
 
     }
-
-
-	@Override
-	public void startPosition(String... positionen) {
-		for(int i = 0; i < positionen.length; i++) {
-			 String[] str = positionen[i].split("\\:");
-			 for(Kamel k : KamelList.getList()) {
-				 
-			 }
-			 /* 1) Durch Kamelliste durchgehen & String mit Farbe vergleichen
-			  * 2) Vergleichen mit Farbe die reingegeben wurde
-			  * 3) Diesem Kamel das Feld zuweisen 
-			  * */
-			 
-		}
-		// TODO Auto-generated method stub
-		for(Farbe f: Farbe.values()) {
-		spielfeld.bewegeKamel(f, 0);
-		}
-		pyramide.initialisiere(positionen);
-		Wuerfel[] arr = pyramide.getwuerfelliste();
-		for(int i = 0; i< arr.length; i++) {
-			spielfeld.bewegeKamel(arr[i].getFarbe(), arr[i].getAugenzahl());
-		}
-		
-	}
 
     @Override
     public void bewegeKamel(Charakter charakter) {
@@ -71,7 +66,7 @@ public class CamelUp implements ICamelUp {
     public Farbe fuehrendesKamel() {
         Kamel erster = null;
         for (int i = 0; i < spielfeld.felder.length; i++) {
-            if (!spielfeld.getFeld(i).getKamele().getHead().equals(null)) {
+            if (!(spielfeld.getFeld(i).getKamele().getAnzElemente() == 0)) {
                 KamelElement temp = spielfeld.getFeld(i).getKamele().getHead();
                 while (temp.hasNext()) {
                     temp = temp.getNext();
@@ -102,7 +97,7 @@ public class CamelUp implements ICamelUp {
     @Override
     public int feldNummer(Farbe farbe) {
         for (int i = 0; i < spielfeld.felder.length; i++) {
-            if (!spielfeld.getFeld(i).getKamele().getHead().equals(null)) {
+            if (!(spielfeld.getFeld(i).getKamele().getHead() == null)) {
                 KamelElement temp = spielfeld.getFeld(i).getKamele().getHead();
                 while (temp.hasNext()) {
                     if (temp.getKamel().getFarbe().equals(farbe)) {
@@ -165,11 +160,11 @@ public class CamelUp implements ICamelUp {
     public void startSpiel() {
         this.startPlayer();
         this.startPosition();
-        while(this.feldNummer(this.fuehrendesKamel()) < 16) {
+        while (this.feldNummer(this.fuehrendesKamel()) < 16) {
             startRunde();
         }
     }
-    
+
     public void startRunde() {
         for (Spieler spieler : spielrunde.getTeilnehemer()) {
             io.anDerReihe(spieler);

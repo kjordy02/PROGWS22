@@ -1,37 +1,36 @@
 package de.ostfalia.prog.s22ws.model;
 
 public class KamelElement {
-	
-	private KamelElement next;
-	private Kamel kamel;
 
-	public KamelElement(Kamel kamel) {
-		this.kamel = kamel;
-	}
+    private KamelElement next = null;
+    private Kamel kamel;
 
-	public KamelElement getNext() {
-		return next;
-	}
+    public KamelElement(Kamel kamel) {
+        this.kamel = kamel;
+    }
 
-	public void setNext(KamelElement next) {
-		this.next = next;
-	}
+    public KamelElement getNext() {
+        return next;
+    }
 
-	public Kamel getKamel() {
-		return kamel;
-	}
+    public void setNext(KamelElement next) {
+        this.next = next;
+    }
 
-	public void setKamel(Kamel kamel) {
-		this.kamel = kamel;
-	}
+    public Kamel getKamel() {
+        return kamel;
+    }
 
-	public boolean hasNext() {
-		if (!next.equals(null)) {
-			return true;
-		} else {
-		return false;
-		}
-	}
-	
-	
+    public void setKamel(Kamel kamel) {
+        this.kamel = kamel;
+    }
+
+    public boolean hasNext() {
+        if (!(next == null)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
