@@ -14,6 +14,7 @@ public class CamelUp implements ICamelUp {
     Spielrunde spielrunde = Spielrunde.getInstance();
     Pyramide pyramide = Pyramide.getInstance();
     Spielfeld spielfeld = Spielfeld.getInstance();
+    IO io = new Console();
     Random rnd = new Random();
 
     @Override
@@ -32,31 +33,53 @@ public class CamelUp implements ICamelUp {
 
     }
 
-    @Override
-    public void startPosition(String... positionen) {
-        // TODO Auto-generated method stub
-        for (Farbe f : Farbe.values()) {
-            spielfeld.bewegeKamel(f, 0);
-        }
-        pyramide.initialisiere(positionen);
-        Wuerfel[] arr = pyramide.getwuerfelliste();
-        for (int i = 0; i < arr.length; i++) {
-            spielfeld.bewegeKamel(arr[i].getFarbe(), arr[i].getAugenzahl());
-        }
 
-    }
+	@Override
+	public void startPosition(String... positionen) {
+		for(int i = 0; i < positionen.length; i++) {
+			 String[] str = positionen[i].split("\\:");
+			 for(Kamel k : KamelList.getList()) {
+				 
+			 }
+			 /* 1) Durch Kamelliste durchgehen & String mit Farbe vergleichen
+			  * 2) Vergleichen mit Farbe die reingegeben wurde
+			  * 3) Diesem Kamel das Feld zuweisen 
+			  * */
+			 
+		}
+		// TODO Auto-generated method stub
+		for(Farbe f: Farbe.values()) {
+		spielfeld.bewegeKamel(f, 0);
+		}
+		pyramide.initialisiere(positionen);
+		Wuerfel[] arr = pyramide.getwuerfelliste();
+		for(int i = 0; i< arr.length; i++) {
+			spielfeld.bewegeKamel(arr[i].getFarbe(), arr[i].getAugenzahl());
+		}
+		
+	}
 
     @Override
     public void bewegeKamel(Charakter charakter) {
         Wuerfel w = spielrunde.getSpieler(charakter).benutzePyramide(pyramide);
         spielfeld.bewegeKamel(w.getFarbe(), w.getAugenzahl());
+        io.bewegeKamel(w.getFarbe(), w.getAugenzahl());
 
     }
 
     @Override
     public Farbe fuehrendesKamel() {
-        // TODO Auto-generated method stub
-        return null;
+        Kamel erster = null;
+        for (int i = 0; i < spielfeld.felder.length; i++) {
+            if (!spielfeld.getFeld(i).getKamele().getHead().equals(null)) {
+                KamelElement temp = spielfeld.getFeld(i).getKamele().getHead();
+                while (temp.hasNext()) {
+                    temp = temp.getNext();
+                }
+                erster = temp.getKamel();
+            }
+        }
+        return erster.getFarbe();
     }
 
     @Override
@@ -67,21 +90,36 @@ public class CamelUp implements ICamelUp {
 
     @Override
     public Farbe letztesKamel() {
-        // TODO Auto-generated method stub
-        return null;
+        Kamel letzter = null;
+        for (int i = 0; i < spielfeld.felder.length; i++) {
+            if (!spielfeld.getFeld(i).getKamele().getHead().equals(null)) {
+                letzter = spielfeld.getFeld(i).getKamele().getHead().getKamel();
+            }
+        }
+        return letzter.getFarbe();
     }
 
     @Override
     public int feldNummer(Farbe farbe) {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < spielfeld.felder.length; i++) {
+            if (!spielfeld.getFeld(i).getKamele().getHead().equals(null)) {
+                KamelElement temp = spielfeld.getFeld(i).getKamele().getHead();
+                while (temp.hasNext()) {
+                    if (temp.getKamel().getFarbe().equals(farbe)) {
+                        return i;
+                    }
+                    temp = temp.getNext();
+                }
+            }
+        }
         return 0;
     }
 
     @Override
-    public int feldNummer(Charakter charakter) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	public int feldNummer(Charakter charakter) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
     @Override
     public int stapelPosition(Farbe farbe) {
@@ -117,6 +155,72 @@ public class CamelUp implements ICamelUp {
     public List<Charakter> spielGewinner() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public void startPlayer() {
+        spielrunde.spielrundeErstellen();
+
+    }
+
+    public void startSpiel() {
+        this.startPlayer();
+        this.startPosition();
+        while(this.feldNummer(this.fuehrendesKamel()) < 16) {
+            startRunde();
+        }
+    }
+    
+    public void startRunde() {
+        for (Spieler spieler : spielrunde.getTeilnehemer()) {
+            io.anDerReihe(spieler);
+            Charakter cha = spieler.getCharakter();
+            int auswahl = io.giveOptionsAtTurn();
+            do {
+                switch (auswahl) {
+                    case 1:
+                        this.bewegeKamel(cha);
+                        break;
+                    /*
+                     * case 2:
+                     * this.
+                     * break;
+                     * case 3:
+                     * this.etappenWette(cha, null);
+                     * break;
+                     * case 4:
+                     * this.wetteTollesKamel(cha, null);
+                     * break;
+                     * case 5:
+                     * this.wetteOllesKamel(cha, null);
+                     * break;
+                     */
+                    default:
+                        io.falscheEingabe();
+                        auswahl = 0;
+                        break;
+                }
+            } while (auswahl == 0);
+            auswahl = io.giveOptionsAfterTurn();
+            Farbe farbe;
+            do {
+                switch (auswahl) {
+                    case 0:
+
+                    case 1:
+                        farbe = this.fuehrendesKamel();
+                        io.fuehrendes(farbe);
+                        break;
+                    case 2:
+                        farbe = this.letztesKamel();
+                        io.letztes(farbe);
+                        break;
+                    default:
+                        io.falscheEingabe();
+                        auswahl = -1;
+                        break;
+                }
+            } while (auswahl == -1);
+        }
     }
 
 }
