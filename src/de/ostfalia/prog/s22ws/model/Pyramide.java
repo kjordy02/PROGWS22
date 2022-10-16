@@ -1,5 +1,8 @@
 package de.ostfalia.prog.s22ws.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import de.ostfalia.prog.s22ws.base.Farbe;
 
 public class Pyramide {
@@ -30,6 +33,18 @@ public class Pyramide {
                     wuerfelliste[i] = new Wuerfel(f, augenzahl);
                 }
             }
+        }
+    }
+    
+    public void initialisiere() {
+        ArrayList<Farbe> color = new ArrayList<Farbe>();
+        for (Farbe f : Farbe.values()) {
+            color.add(f);
+        }
+        Collections.shuffle(color);
+        for(int i = 0; i < 5; i++ ) {
+            
+            wuerfelliste[i] = new Wuerfel(color.get(i), (int) (Math.random() * 3 + 1));
         }
     }
 

@@ -33,12 +33,7 @@ public class CamelUp implements ICamelUp {
         for (int i = 0; i < 4; i++) {
             spielfeld.setzeKamel(color.get(i), (int) (Math.random() * 3 + 1));
         }
-
-        ArrayList<Farbe> color = new ArrayList<Farbe>();
-        int zufallszahl = (int) (Math.random() * 3 + 1);
-        for (Farbe f : Farbe.values()) {
-            color.add(f);
-        }
+    }
 
     @Override
     public void startPosition(String... positionen) {
