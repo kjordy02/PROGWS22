@@ -19,4 +19,6 @@ public interface IO {
     public void fuehrendes(Farbe farbe);
 
     public void letztes(Farbe farbe);
+
+    public void etappeBeendet();
 }

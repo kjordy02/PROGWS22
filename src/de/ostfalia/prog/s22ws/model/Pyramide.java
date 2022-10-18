@@ -35,15 +35,15 @@ public class Pyramide {
             }
         }
     }
-    
+
     public void initialisiere() {
         ArrayList<Farbe> color = new ArrayList<Farbe>();
         for (Farbe f : Farbe.values()) {
             color.add(f);
         }
         Collections.shuffle(color);
-        for(int i = 0; i < 5; i++ ) {
-            
+        for (int i = 0; i < 5; i++) {
+
             wuerfelliste[i] = new Wuerfel(color.get(i), (int) (Math.random() * 3 + 1));
         }
     }
@@ -63,11 +63,22 @@ public class Pyramide {
     public Wuerfel wuerfelZug() {
         for (int i = 0; i < wuerfelliste.length; i++) {
             if (!(wuerfelliste[i] == null)) {
-                return wuerfelliste[i];
+                Wuerfel temp = wuerfelliste[i];
+                wuerfelliste[i] = null;
+                return temp;
             }
         }
         return null;
 
+    }
+
+    public boolean checkWuerfel() {
+        for (Wuerfel w : wuerfelliste) {
+            if (!(w == null)) {
+                return false;
+            }
+        }
+            return true;
     }
 
 }

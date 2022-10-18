@@ -19,7 +19,7 @@ public class Console implements IO {
 	}
 
 	@Override
-	public Spieler[] spielerEinlesen() {
+	public Spieler[] spielerEinlesen() {	    
 		System.out.println("Wie viele Spieler spielen mit ?");
 		int anzahl = sc.nextInt();
 		Spieler[] spieler = new Spieler[anzahl];
@@ -35,13 +35,14 @@ public class Console implements IO {
 			spieler[i - 1] = person;
 		}
 
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		return spieler;
 	}
 
     @Override
     public void anDerReihe(Spieler spieler) {
         System.out.println(spieler.getName() + " ist an der Reihe.");
-        
+        System.out.println();
     }
 
     @Override
@@ -49,19 +50,21 @@ public class Console implements IO {
         System.out.println("Was möchtest du tun?");
         System.out.println("1. Kamel bewegen, 2. Wüstenplättchen legen, 3. Etappensieg wetten, 4. Tolles Kamel wetten 5. Olles Kamel wetten");
         int i = sc.nextInt();
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         return i;
     }
 
     @Override
     public void bewegeKamel(Farbe farbe, int i) {
-        System.out.println("Das Kamel mit der Farbe " + farbe.toString() + "ist um " + i + " Felder nach vorne gezogen.");
-        
+        System.out.println("Das Kamel mit der Farbe " + farbe.toString() + " ist um " + i + " Felder nach vorne gezogen.");
+        sc.next();
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     @Override
     public void falscheEingabe() {
         System.out.println("Du hast eine Falsche Eingabe getätigt.");
-        
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	}
 
 	@Override
@@ -69,16 +72,28 @@ public class Console implements IO {
 		System.out.println("Was möchtest du tun?");
         System.out.println("1. Führendes Kamel wissen, 2. Letztes Kamel wissen");
         int i = sc.nextInt();
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         return i;
 	}
 
 	@Override
 	public void fuehrendes(Farbe farbe) {
 		System.out.println("Das führende kamel hat die Farbe " + farbe.toString());
+		sc.next();
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	}
 
 	@Override
 	public void letztes(Farbe farbe) {
 		System.out.println("Das letzte kamel hat die Farbe " + farbe.toString());
+		sc.next();
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	}
+
+    @Override
+    public void etappeBeendet() {
+        System.out.println("Die Etappe ist beendet.");
+        sc.next();
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    }
 }

@@ -61,7 +61,7 @@ public class CamelUp implements ICamelUp {
     public Farbe fuehrendesKamel() {
         Kamel erster = null;
         for (int i = 0; i < spielfeld.felder.length; i++) {
-            if (!(spielfeld.getFeld(i).getKamele().getAnzElemente() == 0)) {
+            if (!(spielfeld.getFeld(i).getKamele().getHead() == null)) {
                 KamelElement temp = spielfeld.getFeld(i).getKamele().getHead();
                 while (temp.hasNext()) {
                     temp = temp.getNext();
@@ -106,10 +106,10 @@ public class CamelUp implements ICamelUp {
     }
 
     @Override
-	public int feldNummer(Charakter charakter) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int feldNummer(Charakter charakter) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
     @Override
     public int stapelPosition(Farbe farbe) {
@@ -155,9 +155,11 @@ public class CamelUp implements ICamelUp {
     public void startSpiel() {
         this.startPlayer();
         this.startPosition();
-        while (this.feldNummer(this.fuehrendesKamel()) < 16) {
+        this.pyramide.initialisiere();
+        while (!(this.pyramide.checkWuerfel())) {
             startRunde();
         }
+        io.etappeBeendet();
     }
 
     public void startRunde() {
@@ -195,7 +197,7 @@ public class CamelUp implements ICamelUp {
             do {
                 switch (auswahl) {
                     case 0:
-
+                           break;
                     case 1:
                         farbe = this.fuehrendesKamel();
                         io.fuehrendes(farbe);

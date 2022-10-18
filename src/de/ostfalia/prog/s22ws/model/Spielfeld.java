@@ -30,7 +30,8 @@ public class Spielfeld {
     public boolean bewegeKamel(Farbe farbe, int anzFelder) {
         int startFeld = 0;
         for (int i = 0; i < felder.length; i++) {
-            if (farbe.equals(felder[i].getKamele().getKamel(farbe).getFarbe())) {
+            if (felder[i].getKamele().getKamel(farbe) != null
+                    && farbe.equals(felder[i].getKamele().getKamel(farbe).getFarbe())) {
                 startFeld = i;
             }
         }

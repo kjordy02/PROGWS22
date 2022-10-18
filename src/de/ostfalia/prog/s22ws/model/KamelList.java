@@ -41,7 +41,7 @@ public class KamelList {
 
     public void add(KamelElement kamelElement) {
         if (head == null) {
-            this.head = (kamelElement);
+            this.head = kamelElement;
             int zaehler = 1;
             KamelElement pruefer = kamelElement;
             while (pruefer.hasNext()) {
@@ -49,7 +49,6 @@ public class KamelList {
                 pruefer = pruefer.getNext();
             }
             anzElemente += zaehler;
-            anzElemente++;
             return;
         }
         KamelElement temp = head;
@@ -57,7 +56,13 @@ public class KamelList {
             temp = temp.getNext();
         }
         temp.setNext(kamelElement);
-        anzElemente++;
+        int zaehler = 1;
+        KamelElement pruefer = kamelElement;
+        while (pruefer.hasNext()) {
+            zaehler++;
+            pruefer = pruefer.getNext();
+        }
+        anzElemente += zaehler;
 
     }
 
@@ -98,7 +103,7 @@ public class KamelList {
 
     public Kamel getKamel(Farbe farbe) {
         KamelElement temp = head;
-        if (!(anzElemente == 0)) {
+        if (temp != null && !(anzElemente == 0)) {
             if (temp.getKamel().getFarbe().equals(farbe)) {
                 return temp.getKamel();
             }
@@ -118,7 +123,7 @@ public class KamelList {
     public KamelElement getKamelElement(Kamel kamel) {
 
         KamelElement temp = head;
-        if (!(anzElemente == 0)) {
+        if (temp != null && !(anzElemente == 0)) {
             if (temp.getKamel().equals(kamel)) {
                 return temp;
             }
@@ -201,7 +206,7 @@ public class KamelList {
             return null;
 
         } else {
-            return davor;
+            return null;
         }
     }
 
